@@ -1,30 +1,25 @@
 const { UserService } = require ('../src/userService');
 
 const dadosUsuarioPadrao = {
-  nome: 'Fulano de Tal',
-  email: 'fulano@teste.com',
+  nome: 'É o DG vida',
+  email: 'dgmachado@teste.com',
   idade: 25,
 };
 
 describe('UserService - Suíte de Testes com Smells', () => {
   let userService;
-
-  // O setup é executado antes de cada teste
   beforeEach(() => {
     userService = new UserService();
-    userService._clearDB(); // Limpa o "banco" para cada teste
+    userService._clearDB();
   });
 
   test('deve criar e buscar um usuário corretamente', () => {
-    // Act 1: Criar
     const usuarioCriado = userService.createUser(
       dadosUsuarioPadrao.nome,
       dadosUsuarioPadrao.email,
       dadosUsuarioPadrao.idade
     );
     expect(usuarioCriado.id).toBeDefined();
-
-    // Act 2: Buscar
     const usuarioBuscado = userService.getUserById(usuarioCriado.id);
     expect(usuarioBuscado.nome).toBe(dadosUsuarioPadrao.nome);
     expect(usuarioBuscado.status).toBe('ativo');
